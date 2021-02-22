@@ -14,15 +14,20 @@ public class MedicinesController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllMedicines() {
+    public Response searchMedicinesByName(@PathParam("name") String name) {
         List<Medicines> medicines;
         try {
-            medicines = repo.getAllMedicines();
+            medicines = repo.searchMedicinesByName(name);
         } catch (ServerErrorException ex) {
             return Response
                     .status(500).entity(ex.getMessage()).build();
         }
-
+        if (medicines == null) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity("Medicines does not exist!")
+                    .build();
+        }
         return Response
                 .status(Response.Status.OK)
                 .entity(medicines)

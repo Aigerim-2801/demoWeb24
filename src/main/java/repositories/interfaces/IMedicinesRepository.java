@@ -4,7 +4,7 @@ import entities.Medicines;
 import java.util.List;
 public interface IMedicinesRepository {
 
-    boolean createUser(Medicines medicines);
+    boolean createMedicines(Medicines medicines);
     Medicines getMedicinesById(int id);
-    List<Medicines> getAllMediciness();
+    List<Medicines> searchMedicinesByName(String name);
 }

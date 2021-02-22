@@ -17,12 +17,13 @@ public class MedicinesRepository implements IMedicinesRepository  {
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "INSERT INTO users(name,surname,gender) VALUES (?,?,?)";
+            String sql = "INSERT INTO Medicines(name,price,expirationDate,manufacturer) VALUES (?,?,?)";
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setString(1, medicines.getName());
-            st.setString(2, medicines.getSurname());
-            st.setBoolean(3, medicines.getGender());
+            st.setString(2, medicines.getPrice());
+            st.setBoolean(3, medicines.getExpirationDate()),
+                    st.setBoolean(4, medicines.getManufacturer()));
 
             st.execute();
             return true;
@@ -43,7 +44,7 @@ public class MedicinesRepository implements IMedicinesRepository  {
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id,name,surname,gender FROM users WHERE id=?";
+            String sql = "SELECT id,name FROM Medicines WHERE id=?";
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setInt(1, id);
@@ -52,8 +53,9 @@ public class MedicinesRepository implements IMedicinesRepository  {
             if (rs.next()) {
                 Medicines medicines = new Medicines(rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getBoolean("gender")) ;
+                        rs.getString("price"),
+                        rs.getBoolean("expirationDate"),
+                        rs.getBoolean("manufacturer")) ;
 
                 return medicines;
             }
@@ -70,11 +72,11 @@ public class MedicinesRepository implements IMedicinesRepository  {
     }
 
     @Override
-    public List<Medicines> getAllMedicines() {
+    public List<Medicines> searchMedicinesByName(String name) {
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id,name,surname,gender FROM users";
+            String sql = "SELECT id,name FROM Medicines WHERE name LIKE 'a%'";
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);
@@ -82,8 +84,9 @@ public class MedicinesRepository implements IMedicinesRepository  {
             while (rs.next()) {
                 Medicines medicine = new Medicines(rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getBoolean("gender")) ;
+                        rs.getString("price"),
+                        rs.getBoolean("expirationDate"),
+                        rs.getBoolean("manufacturer")) ;
 
                 medicines.add(medicine);
             }

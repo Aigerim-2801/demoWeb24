@@ -1,26 +1,30 @@
 package entities;
 
+import java.time.LocalDate;
+
 public class Medicines {
     private int id;
     private String name;
-    private String surname;
-    private boolean gender;
+    private double price;
+    private LocalDate expirationDate;
+    private String manufacturer;
 
     public Medicines() {
-
     }
 
-    public Medicines(String name, String surname, boolean gender) {
-        setName(name);
-        setSurname(surname);
-        setGender(gender);
+    public Medicines(String name, double price, LocalDate expirationDate, String manufacturer) {
+        this.name = name;
+        this.price = price;
+        this.expirationDate = expirationDate;
+        this.manufacturer = manufacturer;
     }
 
-    public Medicines(int id, String name, String surname, boolean gender) {
-        setId(id);
-        setName(name);
-        setSurname(surname);
-        setGender(gender);
+    public Medicines(int id, String name, double price, LocalDate expirationDate, String manufacturer) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.expirationDate = expirationDate;
+        this.manufacturer = manufacturer;
     }
 
     public int getId() {
@@ -39,33 +43,38 @@ public class Medicines {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public double getPrice() {
+        return price;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public boolean getGender() {
-        return gender;
+    public LocalDate getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setGender(boolean gender) {
-        this.gender = gender;
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
-    public void myFunction() {
+    public String getManufacturer() {
+        return manufacturer;
+    }
 
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     @Override
     public String toString() {
-        return "Medicines{" +
+        return "Medicine{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", gender=" + (gender ? "Male" : "Female") +
+                ", price=" + price +
+                ", expirationDate=" + expirationDate +
+                ", manufacturer='" + manufacturer + '\'' +
                 '}';
     }
 }
